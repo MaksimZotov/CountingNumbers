@@ -3,10 +3,15 @@ package model;
 public class Player {
     private Manager manager;
 
+    private String name;
+
     private Cell cell;
     private int counter;
 
-    public Player(Manager manager) { this.manager = manager; }
+    public Player(Manager manager, String name) {
+        this.manager = manager;
+        this.name = name;
+    }
 
     public void initPlayer(Cell cell, int counter) {
         this.cell = cell;

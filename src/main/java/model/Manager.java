@@ -1,7 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Manager {
-    Field field;
+    private Field field;
+    private ArrayList<Player> players = new ArrayList<>();
+
+    public void addPlayer(String name) { players.add(new Player(this, name)); }
 
     public void createField (int height, int width) {
         field = new Field(height, width);
