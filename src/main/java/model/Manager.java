@@ -12,7 +12,7 @@ public class Manager {
         field = new Field(height, width);
     }
 
-    public void movePlayer(Player player, Direction direction) {
+    void movePlayer(Player player, Direction direction) {
         Cell currentCell = player.getCell();
         Cell nextCell;
         switch (direction) {
@@ -25,14 +25,14 @@ public class Manager {
         player.setCell(nextCell);
     }
 
-    public void increaseCounterOfPlayer(Player player) {
+    void increaseCounterOfPlayer(Player player) {
         Cell currentCell = player.getCell();
         player.increaseCounter(currentCell.getNumber());
         currentCell.setNumber(0);
     }
 
     public void playerLost(Player player) {
-
+        //...
     }
 
     public void initPlayer(Player player, Cell cell, int counter) {

@@ -8,12 +8,12 @@ public class Player {
     private Cell cell;
     private int counter;
 
-    public Player(Manager manager, String name) {
+    Player(Manager manager, String name) {
         this.manager = manager;
         this.name = name;
     }
 
-    public void initPlayer(Cell cell, int counter) {
+    void initPlayer(Cell cell, int counter) {
         this.cell = cell;
         this.counter = counter;
     }
@@ -22,21 +22,21 @@ public class Player {
         manager.movePlayer(this, direction);
     }
 
-    public void increaceCounter() { manager.increaseCounterOfPlayer(this); }
+    public void increaseCounter() { manager.increaseCounterOfPlayer(this); }
 
-    public void increaseCounter(int number) { counter += number; }
+    void increaseCounter(int number) { counter += number; }
 
-    public void decreaseCounter(int number) {
+    void decreaseCounter(int number) {
         counter -= number;
         if (counter <= 0)
             manager.playerLost(this);
     }
 
-    public void setCell(Cell cell) {
+    void setCell(Cell cell) {
         this.cell = cell;
     }
 
-    public Cell getCell() {
+    Cell getCell() {
         return cell;
     }
 }

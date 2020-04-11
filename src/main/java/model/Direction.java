@@ -1,3 +1,3 @@
 package model;
 
-public enum Direction { LEFT, UP, RIGHT, DOWN }
+enum Direction { LEFT, UP, RIGHT, DOWN }

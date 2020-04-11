@@ -2,11 +2,11 @@ package model;
 
 import java.util.Random;
 
-public class Field {
+class Field {
     private Cell[][] cells;
     private Random random = new Random();
 
-    public Field(int height, int width) {
+    Field(int height, int width) {
         cells = new Cell[2 * height][];
         for (int i = 0; i < 2 * height; i++) {
             cells[i] = new Cell[width];
@@ -15,7 +15,7 @@ public class Field {
         }
     }
 
-    public Cell getCell (int x, int y) {
+    Cell getCell(int x, int y) {
         return cells[x][y];
     }
 }

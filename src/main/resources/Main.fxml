@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.text.Text?>
+<Group>
+    <Text text = "Hi! Enter your name: " layoutX="150" layoutY="130"/>
+    <TextField layoutX="132" layoutY="150"/>
+    <Button text="Connect to game" layoutX="150" layoutY="200"/>
+</Group>

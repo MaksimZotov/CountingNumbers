@@ -1,21 +1,19 @@
 package model;
 
-public class Cell {
+class Cell {
     private int x;
     private int y;
     private int number;
 
-    public Cell(int x, int y, int number) {
+    Cell(int x, int y, int number) {
         this.x = 0;
         this.y = 0;
         this.number = number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
+    void setNumber(int number) { this.number = number; }
 
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public int getNumber() { return number; }
+    int getX() { return x; }
+    int getY() { return y; }
+    int getNumber() { return number; }
 }
