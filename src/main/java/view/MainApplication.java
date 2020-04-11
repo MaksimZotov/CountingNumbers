@@ -10,7 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class MainApplication extends Application {
-    Client client = new Client();
+    private static Client client = new Client();
 
     public static void main(String[] args) {
         Application.launch(args);
