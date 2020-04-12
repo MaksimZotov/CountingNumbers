@@ -4,26 +4,27 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    Server server = new Server();
-
-    public void connectToServer(String name) {
-        server.addPlayer(name);
-    }
+    public void joinPlayer(String name) { }
+    public void movePlayer(String name, String direction) { }
+    public void increaseCounterOfPlayer(String name) { }
 
     private static Socket clientSocket;
     private static BufferedReader in; 
     private static BufferedWriter out; 
 
-    public static void interactionWithServer() {
+    public static void main(String[] args) {
         try {
             try {
                 clientSocket = new Socket("localhost", 4004);
+                System.out.println("Client was launched");
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-                String someMessageToServer = "some message";
+                String someMessageToServer = "Some message";
+                System.out.println(someMessageToServer);
                 out.write(someMessageToServer + "\n");
                 out.flush();
-                in.readLine();
+                String answerFromServer = in.readLine();
+                System.out.println(answerFromServer);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

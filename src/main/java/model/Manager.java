@@ -1,41 +1,71 @@
 package model;
 
+import controller.RequestHandler;
+import controller.ServerObligations;
+
 import java.util.ArrayList;
 
-public class Manager {
+public class Manager implements RequestHandler {
+    private ServerObligations server;
     private Field field;
     private ArrayList<Player> players = new ArrayList<>();
-
-    public void addPlayer(String name) { players.add(new Player(this, name)); }
 
     public void createField (int height, int width) {
         field = new Field(height, width);
     }
 
-    void movePlayer(Player player, Direction direction) {
+    private Player findPlayer(String name) {
+        Player player = null;
+        for (Player item : players)
+            if (item.getName().equals(name)) {
+                player = item;
+                break;
+            }
+        if (player == null)
+            throw new IllegalStateException("Player with name \""+ name + "\" does not exist");
+        return player;
+    }
+
+    public void playerLost(String name) { server.sendEventPlayerLost(name); }
+
+    private void initPlayer(Player player, Cell cell, int counter) {
+        player.initPlayer(cell, counter);
+    }
+
+    @Override
+    public void joinPlayer(String name) {
+        players.add(new Player(this, name));
+        server.answerOnJoinPlayer(name);
+        if (players.size() == 2) {
+            createField(8, 3);
+            initPlayer(players.get(0), new Cell(1, 0, 0), 10);
+            initPlayer(players.get(1), new Cell(1, 7, 0), 10);
+        }
+    }
+
+    @Override
+    public void movePlayer(String name, String direction) {
+        Player player = findPlayer(name);
         Cell currentCell = player.getCell();
         Cell nextCell;
         switch (direction) {
-            case LEFT: nextCell = field.getCell(currentCell.getX() - 1, currentCell.getY()); break;
-            case RIGHT: nextCell = field.getCell(currentCell.getX() + 1, currentCell.getY()); break;
-            case UP: nextCell = field.getCell(currentCell.getX(), currentCell.getY() - 1); break;
-            default: nextCell = field.getCell(currentCell.getX(), currentCell.getY() + 1);
+            case "left": nextCell = field.getCell(currentCell.getX() - 1, currentCell.getY()); break;
+            case "right": nextCell = field.getCell(currentCell.getX() + 1, currentCell.getY()); break;
+            case "up": nextCell = field.getCell(currentCell.getX(), currentCell.getY() - 1); break;
+            case "down": nextCell = field.getCell(currentCell.getX(), currentCell.getY() + 1); break;
+            default: throw new IllegalArgumentException("Incorrect direction");
         }
         player.decreaseCounter(currentCell.getNumber());
         player.setCell(nextCell);
+        server.answerOnMovePlayer(name);
     }
 
-    void increaseCounterOfPlayer(Player player) {
+    @Override
+    public void increaseCounterOfPlayer(String name) {
+        Player player = findPlayer(name);
         Cell currentCell = player.getCell();
         player.increaseCounter(currentCell.getNumber());
         currentCell.setNumber(0);
-    }
-
-    public void playerLost(Player player) {
-        //...
-    }
-
-    public void initPlayer(Player player, Cell cell, int counter) {
-        player.initPlayer(cell, counter);
+        server.answerOnIncreaseCounterOfPlayer(name);
     }
 }

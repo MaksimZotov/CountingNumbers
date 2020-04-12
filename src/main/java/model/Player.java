@@ -18,18 +18,12 @@ public class Player {
         this.counter = counter;
     }
 
-    public void move(Direction direction) {
-        manager.movePlayer(this, direction);
-    }
-
-    public void increaseCounter() { manager.increaseCounterOfPlayer(this); }
-
     void increaseCounter(int number) { counter += number; }
 
     void decreaseCounter(int number) {
         counter -= number;
         if (counter <= 0)
-            manager.playerLost(this);
+            manager.playerLost(name);
     }
 
     void setCell(Cell cell) {
@@ -38,5 +32,9 @@ public class Player {
 
     Cell getCell() {
         return cell;
+    }
+
+    public String getName() {
+        return name;
     }
 }
