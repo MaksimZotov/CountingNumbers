@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="100.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="400.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="200.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="300.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="500.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="600.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="700.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="100.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="100.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="200.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="300.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="200.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="300.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="400.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="400.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="500.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="500.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="600.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="600.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="700.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="700.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="800.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="800.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bfbfbf" height="100.0" layoutX="800.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Circle fill="#00bf00" layoutX="150.0" layoutY="250.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#3b86ff" layoutX="850.0" layoutY="250.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fill="white" layoutX="100.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text fill="white" layoutX="800.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="100.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="200.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="700.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="800.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="100.0">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Button layoutX="422.0" layoutY="465.0" mnemonicParsing="false" text="Quit the game">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Text layoutX="277.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are blue!" textAlignment="CENTER" wrappingWidth="446.8740234375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="763.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timer: 17:32" textAlignment="CENTER" wrappingWidth="136.8740234375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="93.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 3:2" textAlignment="CENTER" wrappingWidth="136.8740234375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

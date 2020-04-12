@@ -27,14 +27,14 @@ public class MainApplication extends Application {
         this.stage = stage;
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/Game.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         stage.setScene(new Scene(root));
         stage.setTitle("Counting Numbers");
-        stage.setWidth(400);
-        stage.setHeight(400);
+        stage.setWidth(1000);
+        stage.setHeight(600);
         stage.show();
     }
 
