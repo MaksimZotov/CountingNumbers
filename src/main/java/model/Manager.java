@@ -7,16 +7,12 @@ import controller.obligations.ServerObligations;
 import java.util.ArrayList;
 
 public class Manager implements ManagerObligations {
-    private static ServerObligations server;
-    public static void main(String[] args) {
-        Manager manager = new Manager();
-        server = new Server(manager);
-        manager.setServer(server);
+    public void main() {
+        server = new Server(this);
         server.main();
     }
-    private void setServer(ServerObligations server) { Manager.server = server; }
 
-
+    private ServerObligations server;
     private Field field;
     private ArrayList<Player> players = new ArrayList<>();
 
