@@ -4,8 +4,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.text.Text?>
-<Group>
-    <Text text = "Hi! Enter your name: " layoutX="150" layoutY="130"/>
-    <TextField layoutX="132" layoutY="150"/>
-    <Button text="Connect to game" layoutX="150" layoutY="200"/>
+<Group xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainApplication">
+    <Text text = "Hi! Enter your name: " layoutX="128" layoutY="130" fx:id="messageFromServer"/>
+    <TextField layoutX="128" layoutY="150" fx:id="name"/>
+    <Button text="Connect to game" layoutX="128" layoutY="193" fx:id="buttonConnect" onAction="#sendMessage"/>
 </Group>

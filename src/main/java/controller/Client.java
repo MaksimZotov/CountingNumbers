@@ -1,29 +1,37 @@
 package controller;
 
+import controller.obligations.ClientObligations;
+
 import java.io.*;
 import java.net.Socket;
 
-public class Client {
-    public void joinPlayer(String name) { }
-    public void movePlayer(String name, String direction) { }
-    public void increaseCounterOfPlayer(String name) { }
+public class Client implements ClientObligations {
+    private Socket clientSocket;
+    private BufferedReader in;
+    private BufferedWriter out;
 
-    private static Socket clientSocket;
-    private static BufferedReader in; 
-    private static BufferedWriter out; 
+    @Override
+    public void joinPlayer(String name) {
+        try {
+            clientSocket = new Socket("localhost", 6666);
+            System.out.println("Client was launched");
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            String messageToServer = name;
+            System.out.println(messageToServer);
+            out.write(messageToServer + '\n');
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static void main(String[] args) {
+    @Override
+    public String answerOnJoinPlayer(String name) {
+        String answerFromServer = null;
         try {
             try {
-                clientSocket = new Socket("localhost", 4004);
-                System.out.println("Client was launched");
-                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-                String someMessageToServer = "Some message";
-                System.out.println(someMessageToServer);
-                out.write(someMessageToServer + "\n");
-                out.flush();
-                String answerFromServer = in.readLine();
+                answerFromServer = in.readLine();
                 System.out.println(answerFromServer);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -35,5 +43,14 @@ public class Client {
         } catch (IOException e) {
             System.err.println(e);
         }
+        return answerFromServer;
     }
+
+
+    @Override public void movePlayer(String name, String direction) { }
+    @Override public void increaseCounterOfPlayer(String name) { }
+
+    @Override public void answerOnMovePlayer(String name) { }
+    @Override public void answerOnIncreaseCounterOfPlayer(String name) { }
+    @Override public void getEventPlayerLost(String name) { }
 }

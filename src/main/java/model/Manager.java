@@ -1,12 +1,22 @@
 package model;
 
-import controller.RequestHandler;
-import controller.ServerObligations;
+import controller.obligations.ManagerObligations;
+import controller.Server;
+import controller.obligations.ServerObligations;
 
 import java.util.ArrayList;
 
-public class Manager implements RequestHandler {
-    private ServerObligations server;
+public class Manager implements ManagerObligations {
+    private static ServerObligations server;
+    public static void main(String[] args) {
+        Manager manager = new Manager();
+        server = new Server(manager);
+        manager.setServer(server);
+        server.main();
+    }
+    private void setServer(ServerObligations server) { Manager.server = server; }
+
+
     private Field field;
     private ArrayList<Player> players = new ArrayList<>();
 
@@ -41,6 +51,14 @@ public class Manager implements RequestHandler {
             initPlayer(players.get(0), new Cell(1, 0, 0), 10);
             initPlayer(players.get(1), new Cell(1, 7, 0), 10);
         }
+    }
+
+    @Override
+    public String answerOnJoinPlayer() {
+        String string = "";
+        for (Player item : players)
+            string += item.getName();
+        return string + " Test";
     }
 
     @Override
