@@ -1,12 +1,12 @@
-package model;
+package model.gamecomponents;
 
 import java.util.Random;
 
-class Field {
+public class Field {
     private Cell[][] cells;
     private Random random = new Random();
 
-    Field(int height, int width) {
+    public Field(int height, int width) {
         cells = new Cell[2 * height][];
         for (int i = 0; i < 2 * height; i++) {
             cells[i] = new Cell[width];
@@ -15,7 +15,7 @@ class Field {
         }
     }
 
-    Cell getCell(int x, int y) {
+    public Cell getCell(int x, int y) {
         return cells[x][y];
     }
 }

@@ -1,4 +1,4 @@
-package controller;
+package controller.server;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,13 +23,15 @@ public class ClientHandler extends Thread {
 
     @Override
     public void run() {
+        handleDataFromClient();
+    }
+
+    public void handleDataFromClient() {
         String data;
         try {
             while (true) {
                 data = in.readLine();
-                server.joinPlayer(data);
-                for(ClientHandler item : server.getClientHandlers())
-                    item.sendData(server.getManager().answerOnJoinPlayer() + '\n');
+                server.getManager().handleDataFromClient(data);
             }
         }
         catch (IOException e) {
@@ -37,10 +39,12 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void sendData(String data) {
+    public void sendDataToClient(String data) {
         try {
             out.write(data + "\n");
             out.flush();
-        } catch (IOException ignored) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

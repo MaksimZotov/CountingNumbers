@@ -1,4 +1,6 @@
-package model;
+package model.gamecomponents;
+
+import model.manager.Manager;
 
 public class Player {
     private Manager manager;
@@ -8,29 +10,29 @@ public class Player {
     private Cell cell;
     private int counter;
 
-    Player(Manager manager, String name) {
+    public Player(Manager manager, String name) {
         this.manager = manager;
         this.name = name;
     }
 
-    void initPlayer(Cell cell, int counter) {
+    public void initPlayer(Cell cell, int counter) {
         this.cell = cell;
         this.counter = counter;
     }
 
-    void increaseCounter(int number) { counter += number; }
+    public void increaseCounter(int number) { counter += number; }
 
-    void decreaseCounter(int number) {
+    public void decreaseCounter(int number) {
         counter -= number;
         if (counter <= 0)
             manager.playerLost(name);
     }
 
-    void setCell(Cell cell) {
+    public void setCell(Cell cell) {
         this.cell = cell;
     }
 
-    Cell getCell() {
+    public Cell getCell() {
         return cell;
     }
 
