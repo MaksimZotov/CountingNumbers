@@ -79,13 +79,13 @@ public class Manager implements Model {
     }
 
     @Override
-    public void handleDataFromClient(String data) {
-        joinPlayer(data);
+    public void handleDataFromClient(Object data) {
+        joinPlayer((String) data);
         sendDataToClient(answerOnJoinPlayer());
     }
 
     @Override
-    public void sendDataToClient(String data) {
+    public void sendDataToClient(Object data) {
         for (ClientHandler item : server.getClientHandlers())
             item.sendDataToClient(data);
     }

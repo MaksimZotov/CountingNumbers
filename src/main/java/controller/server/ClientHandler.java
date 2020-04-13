@@ -5,16 +5,16 @@ import java.net.Socket;
 
 public class ClientHandler extends Thread {
     private Socket socket;
-    private BufferedReader in;
-    private BufferedWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
     private Server server;
 
-    public ClientHandler(Socket socket, Server server) {
+    ClientHandler(Socket socket, Server server) {
         this.server = server;
         this.socket = socket;
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,24 +26,24 @@ public class ClientHandler extends Thread {
         handleDataFromClient();
     }
 
-    public void handleDataFromClient() {
-        String data;
+    public void sendDataToClient(Object data) {
         try {
-            while (true) {
-                data = in.readLine();
-                server.getManager().handleDataFromClient(data);
-            }
-        }
-        catch (IOException e) {
+            out.writeObject(data);
+            out.flush();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendDataToClient(String data) {
+    private void handleDataFromClient() {
+        Object data;
         try {
-            out.write(data + "\n");
-            out.flush();
-        } catch (IOException e) {
+            while (true) {
+                data = in.readObject();
+                server.getManager().handleDataFromClient(data);
+            }
+        }
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

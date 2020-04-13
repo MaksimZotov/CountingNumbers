@@ -10,16 +10,12 @@ import java.util.ArrayList;
 
 public class Server {
     private Model manager;
-    public Model getManager() { return manager; }
-
+    private ServerSocket serverSocket;
     private ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
-    public ArrayList<ClientHandler> getClientHandlers() { return clientHandlers; }
 
     public Server(Manager manager) {
         this.manager = manager;
     }
-
-    private ServerSocket serverSocket;
 
     public void main() {
         try {
@@ -37,4 +33,8 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<ClientHandler> getClientHandlers() { return clientHandlers; }
+
+    Model getManager() { return manager; }
 }

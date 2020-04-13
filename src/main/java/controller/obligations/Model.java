@@ -1,6 +1,6 @@
 package controller.obligations;
 
 public interface Model {
-    void handleDataFromClient(String data);
-    void sendDataToClient(String data);
+    void handleDataFromClient(Object data);
+    void sendDataToClient(Object data);
 }

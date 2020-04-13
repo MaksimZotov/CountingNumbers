@@ -1,15 +1,14 @@
 package controller.client;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class ClientSender extends Thread {
-    private BufferedWriter out;
-    private String dataFromClient;
-
     private boolean runWasLaunchedFromStart = true;
+    private ObjectOutputStream out;
+    private Object dataFromClient;
 
-    public ClientSender(BufferedWriter out) {
+    ClientSender(ObjectOutputStream out) {
         this.out = out;
         start();
     }
@@ -21,14 +20,14 @@ public class ClientSender extends Thread {
             return;
         }
         try {
-            out.write(dataFromClient + "\n");
+            out.writeObject(dataFromClient);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendDataToServer(String data) {
+    void sendDataToServer(Object data) {
         dataFromClient = data;
         run();
     }

@@ -34,25 +34,16 @@ public class MainApplication extends Application implements View {
         }
         stage.setScene(new Scene(root));
         stage.setTitle("Counting Numbers");
-        stage.setWidth(1000);
-        stage.setHeight(600);
+        stage.setWidth(400);
+        stage.setHeight(400);
         stage.show();
     }
 
     @Override
-    public void sendDataToServer(String data) {
-        try {
-            client.sendDataToServer(data);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void sendDataToServer(Object data) { client.sendDataToServer(data); }
 
     @Override
-    public void handleDataFromServer(String data) {
-        messageFromServer.setText(data);
-    }
+    public void handleDataFromServer(Object data) { messageFromServer.setText((String) data); }
 
     @FXML
     private Text messageFromServer;

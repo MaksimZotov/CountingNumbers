@@ -1,13 +1,13 @@
 package controller.client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class ClientReader extends Thread {
     private Client client;
-    private BufferedReader in;
+    private ObjectInputStream in;
 
-    public ClientReader(Client client) {
+    ClientReader(Client client) {
         this.client = client;
         in = client.getIn();
         start();
@@ -15,13 +15,13 @@ public class ClientReader extends Thread {
 
     @Override
     public void run() {
-        String data;
+        Object data;
         try {
             while (true) {
-                data = in.readLine();
+                data = in.readObject();
                 client.handleDataFromServer(data);
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
