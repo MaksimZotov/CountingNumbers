@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
-    private Model manager;
+    private volatile Model manager;
     private ServerSocket serverSocket;
     private ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 

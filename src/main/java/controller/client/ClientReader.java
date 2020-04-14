@@ -2,6 +2,7 @@ package controller.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 public class ClientReader extends Thread {
     private Client client;

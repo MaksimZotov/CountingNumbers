@@ -30,6 +30,7 @@ public class ClientHandler extends Thread {
         try {
             out.writeObject(data);
             out.flush();
+            out.reset();
         } catch (IOException e) {
             e.printStackTrace();
         }
