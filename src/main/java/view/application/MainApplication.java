@@ -21,20 +21,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import model.gamecomponents.Field;
+import model.game.GameState;
 
 import java.io.IOException;
 
 public class MainApplication extends Application implements View {
     private Client client;
-    private Field field;
+    private GameState gameState;
     private Rectangle[][] rectangles;
     private Text[][] texts;
     private Circle playerGreen;
     private Circle playerBlue;
     private Button mainButton;
     private TextField name;
-    private boolean iAmBlue;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -139,15 +138,15 @@ public class MainApplication extends Application implements View {
     private void updateField() {
         for (int i = 0; i < rectangles.length; i++)
             for (int j = 0; j < rectangles[i].length; j++) {
-                if(field.getCell(i, j).getPlayerBlueThere()) {
+                if(gameState.getCell(j, i).getBlueThere()) {
                     playerBlue.setLayoutY(i * 100 - 100);
                     playerBlue.setLayoutX((j + 1) * 100 + 50);
                 }
-                if(field.getCell(i, j).getPlayerGreenThere()) {
+                if(gameState.getCell(j, i).getGreenThere()) {
                     playerGreen.setLayoutY(i * 100 - 100);
                     playerGreen.setLayoutX((j + 1) * 100 + 50);
                 }
-                texts[i][j].setText(String.valueOf(field.getCell(i, j).getNumber()));
+                texts[i][j].setText(String.valueOf(gameState.getCell(i, j).getNumber()));
             }
     }
 
@@ -156,10 +155,8 @@ public class MainApplication extends Application implements View {
 
     @Override
     public void handleDataFromServer(Object data) {
-        if (data instanceof Boolean)
-            iAmBlue = (boolean) data;
-        if (data instanceof Field) {
-            field = (Field) data;
+        if (data instanceof GameState) {
+            gameState = (GameState) data;
             updateField();
         }
     }
