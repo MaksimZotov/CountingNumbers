@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
-    private volatile Model manager;
+    private Model manager;
     private ServerSocket serverSocket;
     private ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
@@ -21,7 +21,6 @@ public class Server {
         try {
             try {
                 serverSocket = new ServerSocket(6666);
-                System.out.println("The server was launched");
                 while (true) {
                     Socket socket = serverSocket.accept();
                     clientHandlers.add(new ClientHandler(socket, this));

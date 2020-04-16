@@ -19,9 +19,7 @@ public class Cell implements Serializable {
         this.number = number;
     }
 
-    public void setGreenThere(boolean there) {
-        greenThere = there;
-    }
+    public void setGreenThere(boolean there) { greenThere = there; }
 
     public void setBlueThere(boolean there) {
         blueThere = there;

@@ -21,7 +21,6 @@ public class Client {
         clientSocket = new Socket("localhost", 6666);
         out = new ObjectOutputStream(clientSocket.getOutputStream());
         in = new ObjectInputStream(clientSocket.getInputStream());
-        System.out.println("Client was launched");
         sender = new ClientSender(out);
         reader = new ClientReader(this);
     }

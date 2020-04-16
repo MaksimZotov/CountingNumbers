@@ -15,17 +15,14 @@ public class Player implements Serializable {
         this.isGreen = isGreen;
         this.gameState = gameState;
         cell = initialCell;
-        cell.setBlueThere(isGreen);
+        cell.setBlueThere(!isGreen);
         cell.setGreenThere(isGreen);
-        countMove = 0;
-    }
-
-    public void increaseScore(int number) {
-        score += number;
+        countMove = 6;
+        score = 10;
     }
 
     public void moveTo(Cell cell) {
-        countMove++;
+        countMove--;
         if (isGreen) {
             this.cell.setGreenThere(false);
             cell.setGreenThere(true);
@@ -34,25 +31,35 @@ public class Player implements Serializable {
             this.cell.setBlueThere(false);
             cell.setBlueThere(true);
         }
-        score -= cell.getNumber();
+        score -= this.cell.getNumber();
         this.cell = cell;
         if (score <= 0)
             gameState.handleLoss(isGreen);
-        if (countMove > 3)
+        if (countMove < 1)
             gameState.decideWhoLost();
     }
+
+    public void increaseScore(int number) {
+        countMove--;
+        score += number;
+        cell.setNumber(0);
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
+        cell.setBlueThere(isGreen);
+        cell.setGreenThere(isGreen);
+    }
+
+    public int getCountMove() { return countMove; }
 
     public boolean getIsGreen() {
         return getIsGreen();
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public int getScore() {
-        return score;
-    }
+    public int getScore() { return score; }
 
     public Cell getCell() {
         return cell;
