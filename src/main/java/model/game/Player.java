@@ -43,11 +43,13 @@ public class Player implements Serializable {
         countMove--;
         score += number;
         cell.setNumber(0);
+        if (countMove < 1)
+            gameState.decideWhoLost();
     }
 
     public void setCell(Cell cell) {
         this.cell = cell;
-        cell.setBlueThere(isGreen);
+        cell.setBlueThere(!isGreen);
         cell.setGreenThere(isGreen);
     }
 

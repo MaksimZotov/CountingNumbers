@@ -1,6 +1,7 @@
 package controller.server;
 
-import model.session.Session;
+import controller.obligations.Session;
+import model.sessions.GameSessionBase;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,7 +13,7 @@ public class ClientHandler extends Thread {
     private Session session;
     private int id;
 
-    ClientHandler(Socket socket, Session session, int id) {
+    public ClientHandler(Socket socket, Session session, int id) {
         this.socket = socket;
         this.session = session;
         this.id = id;
@@ -26,9 +27,7 @@ public class ClientHandler extends Thread {
     }
 
     @Override
-    public void run() {
-        handleDataFromClient();
-    }
+    public void run() { handleDataFromClient(); }
 
     public void sendDataToClient(Object data) {
         try {
@@ -40,9 +39,9 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public int getClientId() {
-        return id;
-    }
+    public void setSession(Session session) { this.session = session; }
+
+    public int getClientId() { return id; }
 
     private void handleDataFromClient() {
         Object data;

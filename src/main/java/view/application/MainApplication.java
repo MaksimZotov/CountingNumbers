@@ -50,32 +50,27 @@ public class MainApplication extends Application implements View {
     public void start(Stage stage) {
         rectangles = new Rectangle[3][8];
         texts = new Text[3][8];
+
         playerGreen = new Circle();
         playerBlue = new Circle();
 
         playerGreen.setFill(Paint.valueOf("#00bf00"));
         playerBlue.setFill(Paint.valueOf("#3b86ff"));
+
         for (int i = 0; i < rectangles.length; i++) {
             for (int j = 0; j < rectangles[i].length; j++) {
                 createRectangleInTheArray(j, i);
                 createTextInTheArray(j, i);
             }
         }
+
         playerGreen.setRadius(50);
-        playerBlue.setRadius(50);
         playerGreen.setLayoutX(150);
         playerGreen.setCenterY(250);
+
+        playerBlue.setRadius(50);
         playerBlue.setLayoutX(850);
         playerBlue.setCenterY(250);
-
-        AnchorPane pane = new AnchorPane();
-        ObservableList<Node> children = pane.getChildren();
-        for (int i = 0; i < rectangles.length; i++) {
-            for (int j = 0; j < rectangles[i].length; j++) {
-                children.add(rectangles[i][j]);
-                children.add(texts[i][j]);
-            }
-        }
 
         mainButton = new Button();
         mainButton.setText("Connect to game");
@@ -86,6 +81,7 @@ public class MainApplication extends Application implements View {
         scoreGreen.setLayoutX(100);
         scoreGreen.setLayoutY(260);
         scoreGreen.setText("$");
+
         scoreBlue = createText();
         scoreBlue.setLayoutX(800);
         scoreBlue.setLayoutY(260);
@@ -97,10 +93,18 @@ public class MainApplication extends Application implements View {
         messageFromServer.setText("Welcome!");
         messageFromServer.setFont(Font.font(40));
 
+        AnchorPane pane = new AnchorPane();
+        ObservableList<Node> children = pane.getChildren();
+        for (int i = 0; i < rectangles.length; i++) {
+            for (int j = 0; j < rectangles[i].length; j++) {
+                children.add(rectangles[i][j]);
+                children.add(texts[i][j]);
+            }
+        }
         children.addAll(playerBlue, playerGreen, mainButton, scoreGreen, scoreBlue, messageFromServer);
+
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-
         stage.setTitle("Counting Numbers");
         stage.setWidth(1000);
         stage.setHeight(600);
@@ -165,6 +169,17 @@ public class MainApplication extends Application implements View {
         rectangles[y][x] = rectangle;
     }
 
+    private void setPosIfPlayerFound(int i, int j, Circle playerCircle, Text score, boolean isGreen) {
+        playerCircle.setLayoutY(i * 100 - 100);
+        playerCircle.setLayoutX((j + 1) * 100 + 50);
+        score.setLayoutX((j + 1) * 100);
+        score.setLayoutY((i + 1) * 100 +  60);
+        if (isGreen)
+            score.setText(String.valueOf(gameState.getScoreGreenPlayer()));
+        else
+            score.setText(String.valueOf(gameState.getScoreBluePlayer()));
+    }
+
     private void updateGameState() {
         StringBuilder msg = new StringBuilder(gameState.getMessageToClient());
         messageFromServer.setText(msg.toString());
@@ -172,20 +187,10 @@ public class MainApplication extends Application implements View {
             return;
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 8; j++) {
-                if(gameState.getCell(j, i).getBlueThere()) {
-                    playerBlue.setLayoutY(i * 100 - 100);
-                    playerBlue.setLayoutX((j + 1) * 100 + 50);
-                    scoreBlue.setLayoutX((j + 1) * 100);
-                    scoreBlue.setLayoutY((i + 1) * 100 +  60);
-                    scoreBlue.setText(String.valueOf(gameState.getScoreBluePlayer()));
-                }
-                if(gameState.getCell(j, i).getGreenThere()) {
-                    playerGreen.setLayoutY(i * 100 - 100);
-                    playerGreen.setLayoutX((j + 1) * 100 + 50);
-                    scoreGreen.setLayoutX((j + 1) * 100);
-                    scoreGreen.setLayoutY((i + 1) * 100 +  60);
-                    scoreGreen.setText(String.valueOf(gameState.getScoreGreenPlayer()));
-                }
+                if(gameState.getCell(j, i).getBlueThere())
+                    setPosIfPlayerFound(i, j, playerBlue, scoreBlue, false);
+                if(gameState.getCell(j, i).getGreenThere())
+                    setPosIfPlayerFound(i, j, playerGreen, scoreGreen, true);
                 texts[i][j].setText(String.valueOf(gameState.getCell(j, i).getNumber()));
             }
         String[] arr = msg.toString().split(" ");
