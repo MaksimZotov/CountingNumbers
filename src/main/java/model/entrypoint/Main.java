@@ -1,7 +1,7 @@
 package model.entrypoint;
 
-import model.manager.Manager;
+import controller.server.Server;
 
 public class Main {
-    public static void main(String[] args) { new Manager().main(); }
+    public static void main(String[] args) { new Server().main(); }
 }

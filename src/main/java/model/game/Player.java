@@ -3,15 +3,15 @@ package model.game;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private final String name;
+    private final int id;
     private final GameState gameState;
     private final boolean isGreen;
     private Cell cell;
     private int score;
     private int countMove;
 
-    public Player(String name, GameState gameState, boolean isGreen, Cell initialCell) {
-        this.name = name;
+    public Player(int id, GameState gameState, boolean isGreen, Cell initialCell) {
+        this.id = id;
         this.isGreen = isGreen;
         this.gameState = gameState;
         cell = initialCell;
@@ -53,15 +53,11 @@ public class Player implements Serializable {
 
     public int getCountMove() { return countMove; }
 
-    public boolean getIsGreen() {
-        return getIsGreen();
-    }
+    public boolean getIsGreen() { return getIsGreen(); }
 
-    public String getName() { return name; }
+    public int getId() { return id; }
 
     public int getScore() { return score; }
 
-    public Cell getCell() {
-        return cell;
-    }
+    public Cell getCell() { return cell; }
 }

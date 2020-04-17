@@ -1,5 +1,7 @@
 package controller.server;
 
+import model.session.Session;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -7,11 +9,13 @@ public class ClientHandler extends Thread {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private Server server;
+    private Session session;
+    private int id;
 
-    ClientHandler(Socket socket, Server server) {
-        this.server = server;
+    ClientHandler(Socket socket, Session session, int id) {
         this.socket = socket;
+        this.session = session;
+        this.id = id;
         try {
             in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -36,12 +40,16 @@ public class ClientHandler extends Thread {
         }
     }
 
+    public int getClientId() {
+        return id;
+    }
+
     private void handleDataFromClient() {
         Object data;
         try {
             while (true) {
                 data = in.readObject();
-                server.getManager().handleDataFromClient(data);
+                session.handleDataFromClient(data, id);
             }
         }
         catch (IOException | ClassNotFoundException e) {

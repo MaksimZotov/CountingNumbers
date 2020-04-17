@@ -15,33 +15,19 @@ public class Cell implements Serializable {
         this.number = number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
+    public void setNumber(int number) { this.number = number; }
 
     public void setGreenThere(boolean there) { greenThere = there; }
 
-    public void setBlueThere(boolean there) {
-        blueThere = there;
-    }
+    public void setBlueThere(boolean there) { blueThere = there; }
 
-    public int getX() {
-        return x;
-    }
+    public int getX() { return x; }
 
-    public int getY() {
-        return y;
-    }
+    public int getY() { return y; }
 
-    public int getNumber() {
-        return number;
-    }
+    public int getNumber() { return number; }
 
-    public boolean getGreenThere() {
-        return greenThere;
-    }
+    public boolean getGreenThere() { return greenThere; }
 
-    public boolean getBlueThere() {
-        return blueThere;
-    }
+    public boolean getBlueThere() { return blueThere; }
 }

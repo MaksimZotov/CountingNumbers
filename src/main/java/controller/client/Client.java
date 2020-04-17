@@ -13,9 +13,7 @@ public class Client {
     private ClientSender sender;
     private ClientReader reader;
 
-    public Client(View view) {
-        this.view = view;
-    }
+    public Client(View view) { this.view = view; }
 
     public void createConnection() throws IOException {
         clientSocket = new Socket("localhost", 6666);
@@ -26,6 +24,7 @@ public class Client {
     }
 
     public void closeConnection() throws IOException {
+        sender.sendDataToServer("exit");
         clientSocket.close();
         in.close();
         out.close();

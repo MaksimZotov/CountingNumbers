@@ -35,7 +35,6 @@ public class MainApplication extends Application implements View {
     private Circle playerGreen;
     private Circle playerBlue;
     private Button mainButton;
-    private TextField name;
     private Text scoreGreen;
     private Text scoreBlue;
     private Text messageFromServer;
@@ -43,6 +42,9 @@ public class MainApplication extends Application implements View {
     public static void main(String[] args) {
         Application.launch(args);
     }
+
+    @Override
+    public void stop() throws IOException { client.closeConnection(); }
 
     @Override
     public void start(Stage stage) {
@@ -75,14 +77,10 @@ public class MainApplication extends Application implements View {
             }
         }
 
-        name = new TextField();
-        name.setLayoutX(100);
-        name.setLayoutY(420);
-
         mainButton = new Button();
         mainButton.setText("Connect to game");
         mainButton.setLayoutX(100);
-        mainButton.setLayoutY(470);
+        mainButton.setLayoutY(450);
 
         scoreGreen = createText();
         scoreGreen.setLayoutX(100);
@@ -99,7 +97,7 @@ public class MainApplication extends Application implements View {
         messageFromServer.setText("Welcome!");
         messageFromServer.setFont(Font.font(40));
 
-        children.addAll(playerBlue, playerGreen, mainButton, name, scoreGreen, scoreBlue, messageFromServer);
+        children.addAll(playerBlue, playerGreen, mainButton, scoreGreen, scoreBlue, messageFromServer);
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
@@ -115,11 +113,11 @@ public class MainApplication extends Application implements View {
     private void handlePressKey(KeyEvent key) {
         String keyCharacter = key.getCharacter();
         switch (keyCharacter) {
-            case "w" : sendDataToServer("move " + name.getText() + " up"); break;
-            case "d" : sendDataToServer("move " + name.getText() + " right"); break;
-            case "s" : sendDataToServer("move " + name.getText() + " down"); break;
-            case "a" : sendDataToServer("move " + name.getText() + " left"); break;
-            case "f" : sendDataToServer("increase " + name.getText());
+            case "w" : sendDataToServer("move up"); break;
+            case "d" : sendDataToServer("move right"); break;
+            case "s" : sendDataToServer("move down"); break;
+            case "a" : sendDataToServer("move left"); break;
+            case "f" : sendDataToServer("increase");
         }
     }
 
@@ -127,16 +125,15 @@ public class MainApplication extends Application implements View {
         if (client == null) {
             client = new Client(this);
             client.createConnection();
-            name.setVisible(false);
             mainButton.setText("Quit the game");
-            sendDataToServer("join " + name.getText());
+            sendDataToServer("join");
         }
         else {
-            sendDataToServer("exit " + name.getText());
+            sendDataToServer("exit");
             client.closeConnection();
             client = null;
-            name.setVisible(true);
             mainButton.setText("Connect to game");
+            messageFromServer.setText("Let's play!");
         }
     }
 
@@ -168,10 +165,10 @@ public class MainApplication extends Application implements View {
         rectangles[y][x] = rectangle;
     }
 
-    private void updateField() {
-        String msg = gameState.getMessageToClient();
-        messageFromServer.setText(msg);
-        if (msg.equals("Waiting for other player"))
+    private void updateGameState() {
+        StringBuilder msg = new StringBuilder(gameState.getMessageToClient());
+        messageFromServer.setText(msg.toString());
+        if (msg.toString().equals("Waiting for other player"))
             return;
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 8; j++) {
@@ -191,6 +188,18 @@ public class MainApplication extends Application implements View {
                 }
                 texts[i][j].setText(String.valueOf(gameState.getCell(j, i).getNumber()));
             }
+        String[] arr = msg.toString().split(" ");
+        if (arr.length > 0 && arr[0].equals("exit")) {
+            try {
+                client.closeConnection();
+            } catch (IOException ignored) { }
+            client = null;
+            mainButton.setText("Connect to game");
+            msg = new StringBuilder();
+            for (int i = 1; i < arr.length; i++)
+                msg.append(arr[i]).append(" ");
+            messageFromServer.setText(msg.toString());
+        }
     }
 
     @Override
@@ -200,7 +209,7 @@ public class MainApplication extends Application implements View {
     public void handleDataFromServer(Object data) {
         if (data instanceof GameState) {
             gameState = (GameState) data;
-            updateField();
+            updateGameState();
         }
     }
 }

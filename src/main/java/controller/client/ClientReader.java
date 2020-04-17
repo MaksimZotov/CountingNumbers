@@ -22,8 +22,6 @@ public class ClientReader extends Thread {
                 data = in.readObject();
                 client.handleDataFromServer(data);
             }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException | ClassNotFoundException ignored) { }
     }
 }
