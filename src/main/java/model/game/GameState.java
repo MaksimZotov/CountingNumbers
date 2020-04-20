@@ -10,6 +10,12 @@ public class GameState implements Serializable {
     private String messageToClient;
     private Cell[][] cells;
     private boolean messageToClientInitialized = false;
+    private final int heightField = 3;
+    private final int widthField = 8;
+    private final int greenStartX = 0;
+    private final int greenStartY = 1;
+    private final int blueStartX = 7;
+    private final int blueStartY = 1;
 
     public void addPlayer(int id) {
         if (playerGreen == null) {
@@ -21,10 +27,10 @@ public class GameState implements Serializable {
             if (playerGreen.getId() == id)
                 throw new IllegalArgumentException("Player with id \"" + id +"\" already exists");
             createField();
-            playerGreen.setCell(getCell(0, 1));
-            cells[1][0].setNumber(0);
-            playerBlue = new Player(id, this, false, getCell(7, 1));
-            cells[1][7].setNumber(0);
+            playerGreen.setCell(getCell(greenStartX, greenStartY));
+            cells[greenStartY][greenStartX].setNumber(0);
+            playerBlue = new Player(id, this, false, getCell(blueStartX, blueStartY));
+            cells[blueStartY][blueStartX].setNumber(0);
             messageToClient = playerGreen.getCountMove() + " : " + playerBlue.getCountMove();
             return;
         }
@@ -45,7 +51,7 @@ public class GameState implements Serializable {
             case "right": x++; break;
             default: throw new IllegalArgumentException("Incorrect direction");
         }
-        if (y >= 0 && y <= 2 && x >= 0 && x <= 7)
+        if (y >= 0 && y < heightField && x >= 0 && x < widthField)
             player.moveTo(cells[y][x]);
         setMessageToClient();
     }
@@ -68,7 +74,7 @@ public class GameState implements Serializable {
             player = "green";
         if (playerBlue != null && playerBlue.getId() == id)
             player = "blue";
-        messageToClient = "exit The " + player + " player leave the game";
+        messageToClient = "exit The " + player + " player left the game";
     }
 
     public int getScoreGreenPlayer() { return playerGreen.getScore(); }
@@ -95,23 +101,24 @@ public class GameState implements Serializable {
     }
 
     private void createField() {
-        cells = new Cell[3][];
-        for (int i = 0; i < 3; i++) {
-            cells[i] = new Cell[8];
-            for (int j = 0; j < 4; j++)
+        cells = new Cell[heightField][];
+        int widthDiv2 = widthField / 2;
+        for (int i = 0; i < heightField; i++) {
+            cells[i] = new Cell[widthField];
+            for (int j = 0; j < widthDiv2; j++)
                 cells[i][j] = new Cell(j, i, random.nextInt(10));
         }
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 4; j++)
-                cells[i][j + 4] = new Cell(j + 4, i, cells[2 - i][3 - j].getNumber());
+        for (int i = 0; i < heightField; i++)
+            for (int j = 0; j < widthDiv2; j++)
+                cells[i][j + widthDiv2] = new Cell(j + widthDiv2, i, cells[heightField - 1 - i][widthDiv2 - 1 - j].getNumber());
     }
 
     private void createNewGame() {
         createField();
-        playerGreen = new Player(playerGreen.getId(), this, true, getCell(0, 1));
-        playerBlue = new Player(playerBlue.getId(), this, false, getCell(7, 1));
-        cells[1][0].setNumber(0);
-        cells[1][7].setNumber(0);
+        playerGreen = new Player(playerGreen.getId(), this, true, getCell(greenStartX, greenStartY));
+        playerBlue = new Player(playerBlue.getId(), this, false, getCell(blueStartX, blueStartY));
+        cells[greenStartY][greenStartX].setNumber(0);
+        cells[blueStartY][blueStartX].setNumber(0);
     }
 
     private Player findPlayer(int id) {

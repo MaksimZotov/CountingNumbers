@@ -38,6 +38,8 @@ public class MainApplication extends Application implements View {
     private Text scoreGreen;
     private Text scoreBlue;
     private Text messageFromServer;
+    private final int heightField = 3;
+    private final int widthField = 8;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -48,8 +50,8 @@ public class MainApplication extends Application implements View {
 
     @Override
     public void start(Stage stage) {
-        rectangles = new Rectangle[3][8];
-        texts = new Text[3][8];
+        rectangles = new Rectangle[heightField][widthField];
+        texts = new Text[heightField][widthField];
 
         playerGreen = new Circle();
         playerBlue = new Circle();
@@ -137,7 +139,7 @@ public class MainApplication extends Application implements View {
             client.closeConnection();
             client = null;
             mainButton.setText("Connect to game");
-            messageFromServer.setText("Let's play!");
+            messageFromServer.setText("Click on the button \"Connect to game\"");
         }
     }
 
